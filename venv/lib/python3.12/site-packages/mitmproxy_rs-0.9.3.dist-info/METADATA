@@ -1,0 +1,28 @@
+Metadata-Version: 2.3
+Name: mitmproxy_rs
+Version: 0.9.3
+Classifier: Programming Language :: Rust
+Classifier: Programming Language :: Python :: Implementation :: CPython
+Classifier: Programming Language :: Python :: Implementation :: PyPy
+Classifier: Programming Language :: Python :: 3 :: Only
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Development Status :: 5 - Production/Stable
+Requires-Dist: mitmproxy-windows ==0.9.3 ; os_name == 'nt'
+Requires-Dist: mitmproxy-macos ==0.9.3 ; sys_platform == 'darwin'
+Author: Fabio Valentini <decathorpe@gmail.com>, Maximilian Hils <cargo@maximilianhils.com>
+Author-email: Fabio Valentini <decathorpe@gmail.com>, Maximilian Hils <cargo@maximilianhils.com>
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown; charset=UTF-8; variant=GFM
+Project-URL: Source Code, https://github.com/mitmproxy/mitmproxy-rs
+
+# mitmproxy_rs
+
+This package contains mitmproxy's Rust bits.
+
+[![dev documentation](https://shields.mitmproxy.org/badge/docs-Python%20API-blue.svg)](https://mitmproxy.github.io/mitmproxy_rs/)
+
+https://github.com/mitmproxy/mitmproxy_rs
+

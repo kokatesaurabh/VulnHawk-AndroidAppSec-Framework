@@ -1,0 +1,3 @@
+[console_scripts]
+libsast=libsast.__main__:main
+

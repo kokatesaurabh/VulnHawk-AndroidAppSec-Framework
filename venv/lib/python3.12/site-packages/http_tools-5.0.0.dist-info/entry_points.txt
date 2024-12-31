@@ -1,0 +1,2 @@
+[console_scripts]
+httptools = http_tools.__main__:main

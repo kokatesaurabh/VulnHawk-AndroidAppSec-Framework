@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: svgutils
+Version: 0.3.4
+Summary: Python SVG editor
+Home-page: https://svgutils.readthedocs.io
+Author: Bartosz Telenczuk
+Author-email: bartosz.telenczuk@gmail.com
+License: UNKNOWN
+Download-URL: https://github.com/btel/svg_utils/archive/v0.3.4.tar.gz
+Platform: UNKNOWN
+Classifier: Development Status :: 4 - Beta
+Classifier: Environment :: Console
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Multimedia :: Graphics :: Editors :: Vector-Based
+Classifier: Topic :: Scientific/Engineering :: Visualization
+Classifier: Topic :: Text Processing :: Markup
+Requires-Dist: lxml
+
+This is an utility package that helps to edit and
+concatenate SVG files. It is especially directed at scientists preparing
+final figures for submission to journal. So far it supports arbitrary
+placement and scaling of svg figures and
+adding markers, such as labels.
+

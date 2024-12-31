@@ -1,0 +1,6 @@
+#!/home/saurabh/VulnHawk-AndroidAppSec-Framework/venv/bin/python
+import sys
+from vulnhawk.__main__ import main
+
+if __name__ == '__main__':
+    sys.exit(main())

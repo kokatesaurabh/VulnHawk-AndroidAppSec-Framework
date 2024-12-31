@@ -1,0 +1,111 @@
+Metadata-Version: 2.1
+Name: shelljob
+Version: 0.6.3
+Summary: Run multiple subprocesses asynchronous/in parallel with streamed output/non-blocking reading. Also various tools to replace shell scripts.
+Home-page: https://github.com/mortoray/shelljob/
+Author: edA-qa mort-ora-y
+Author-email: eda-qa@disemia.com
+License: GPLv3
+Platform: UNKNOWN
+Classifier: Development Status :: 6 - Mature
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Intended Audience :: Developers
+Classifier: Environment :: Console
+Classifier: License :: OSI Approved :: GNU General Public License v3 (GPLv3)
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Terminals
+Classifier: Topic :: System
+Classifier: Topic :: Software Development :: Build Tools
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+
+# shelljob
+
+This provides a clean way to execute subprocesses, either one or multiple in parallel, capture their output and monitor progress:
+
+- Single sub process `call` with optional timeout
+- High level `FileMonitor` to execute several processes in parallel and store output in a file
+- Low level `Group` execution to execute jobs in parallel and capture output
+
+Additional tools for working with the filesystem are also included: 
+
+- `find` which offers much of the functionality of the shell find utility
+- `shelljob.fs.NamedTempFile` provides a _with_ block wrapper for temporary named files
+
+[API Documentation](https://mortoray.github.io/shelljob/)
+
+
+# Install
+
+```
+pip install shelljob
+```
+
+# Parallel Subprocesses
+
+Using the Job system is the quickest approach to just run processes and log their output (by default in files named '/tmp/job_ID.log')
+
+````
+from shelljob import job
+
+jm = job.FileMonitor()
+jm.run([
+	[ 'ls', '-alR', '/usr/local' ],
+	'my_prog',
+	'build output input',
+])
+````
+
+An array will passed directly to `subprocess.Popen`, a string is first parsed with `shlex.split`.
+
+The lower level `Group` class provides a simple container for more manual job management.
+
+````
+from shelljob import proc
+
+g = proc.Group()
+p1 = g.run( [ 'ls', '-al', '/usr/local' ] )
+p2 = g.run( [ 'program', 'arg1', 'arg2' ] )
+
+while g.is_pending():
+	lines = g.readlines()
+	for proc, line in lines:
+		sys.stdout.write( "{}:{}".format( proc.pid, line ) )
+````
+
+## Encoding
+
+By default the output will be binary encoding. You can specify an `encoding='utf-8'` to the `run` command to use an encoded text stream instead. Be aware that if the encoding fails (the program emits an invalid sequence) the running will be interrupted. You should also use the `on_error` function to check for this.
+
+Line-endings will always be preserved.
+
+# Simple Subprocess calls
+
+A simplified `call` function allows timeouts on subprocesses and easy acces to their output.
+
+````
+from shelljob import proc
+
+# capture the output
+output = proc.call( 'ls /tmp' )
+# this raises a proc.Timeout exception
+proc.call( 'sleep 10', timeout = 0.1 )
+````
+
+# Find
+
+The 'find' funtion is a multi-faceted approach to generating listings of files.
+
+````
+from shelljob import fs
+
+files = fs.find( '/usr/local', name_regex = '.*\\.so' )
+print( "\n".join(files) )
+````
+
+Refer to the [API docs](https://mortoray.github.io/shelljob/) for all parameters. Just let me know if there is some additional option you need.
+
+
+
+
